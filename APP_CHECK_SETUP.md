@@ -14,7 +14,7 @@ config in `base.html` is public (it has to be -- it ships to every
 browser), so in principle someone could hand-craft Firestore writes
 without ever loading the real site. App Check adds a second, harder-to-fake
 signal: every request also has to carry a fresh attestation token proving
-it came from an actual page load of `proxylair.github.io/cardpulse`,
+it came from an actual page load of `proxylair.github.io/marketlair`,
 generated via reCAPTCHA v3 running invisibly in the background (no
 checkbox, no visitor-facing friction).
 
@@ -28,7 +28,7 @@ checkbox, no visitor-facing friction).
    once you register the provider in step 2).
 
 2. **Enable App Check in the Firebase console.**
-   Project settings -> App Check -> find the CardPulse web app -> Register
+   Project settings -> App Check -> find the MarketLair web app -> Register
    -> provider: reCAPTCHA v3 -> paste the site key from step 1.
 
 3. **Paste the site key into the code.**

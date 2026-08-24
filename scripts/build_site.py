@@ -27,7 +27,7 @@ CONTENT_DIR = ROOT / "content" / "articles"
 TEMPLATE_PATH = ROOT / "templates" / "base.html"
 SNAP_DIR = ROOT / "data" / "snapshots"
 SITE_DIR = ROOT / "docs"  # GitHub Pages can serve straight from a /docs folder, no extra config
-SITE_URL = "https://proxylair.github.io/cardpulse"  # update if/when a custom domain is bought
+SITE_URL = "https://proxylair.github.io/marketlair"  # update if/when a custom domain is bought
 
 # Cards below this price move around on pennies alone -- a $0.04 -> $0.08
 # card is "+100%" but meaningless. Keep the homepage movers list honest.
@@ -258,7 +258,7 @@ def style_buy_cta(html_body: str) -> str:
     # below is safe to hardcode.
     html_body = re.sub(
         r'(<p class="buy-cta">.*?</p>)',
-        r'\1<em class="disclosure-note">CardPulse may earn a commission on '
+        r'\1<em class="disclosure-note">MarketLair may earn a commission on '
         r'purchases through the links above. It doesn’t change the price '
         r'you pay -- see our <a href="../about.html">disclosure</a>.</em>',
         html_body,
@@ -648,7 +648,7 @@ def build_engagement_data(snapshot):
         moved + the top few) that the "Since Your Last Visit" banner polls
         to decide whether it has anything worth telling a returning visitor.
     Both are written to the site root and fetched root-relative via
-    window.CARDPULSE_ROOT, same as every other cross-page asset here.
+    window.MARKETLAIR_ROOT, same as every other cross-page asset here.
     """
     files = sorted(SNAP_DIR.glob("*.json"))
     card_index = {}
@@ -706,7 +706,7 @@ def render_related_articles(current_slug, current_game, all_articles):
     )
     return (
         "<section class='related'>"
-        "<h2 class='section-heading'>More from CardPulse</h2>"
+        "<h2 class='section-heading'>More from MarketLair</h2>"
         f"<ul class='article-grid'>{items}</ul>"
         "</section>"
     )
@@ -743,10 +743,10 @@ def build():
     # firebase-messaging-sw.js MUST land at the site root (not under
     # articles/) -- a service worker's scope is the directory it's served
     # from and everything below it, so root is what lets it cover the
-    # whole site. subscribe.js registers it via window.CARDPULSE_ROOT
+    # whole site. subscribe.js registers it via window.MARKETLAIR_ROOT
     # (the same "" / "../" prefix every other on-page link uses), which is
     # what actually makes this correct on a GitHub Pages project subpath
-    # like proxylair.github.io/cardpulse/ -- a literal "/firebase-messaging-sw.js"
+    # like proxylair.github.io/marketlair/ -- a literal "/firebase-messaging-sw.js"
     # would 404 there (this bit us once already; see git history).
     shutil.copyfile(
         ROOT / "templates" / "firebase-messaging-sw.js",
@@ -768,8 +768,8 @@ def build():
         shutil.copyfile(ROOT / "templates" / icon_file, SITE_DIR / icon_file)
     (SITE_DIR / "manifest.webmanifest").write_text(json.dumps({
         "id": ".",
-        "name": "CardPulse",
-        "short_name": "CardPulse",
+        "name": "MarketLair",
+        "short_name": "MarketLair",
         "description": "Real trading-card market data, tracked regularly, explained simply.",
         "start_url": ".",
         "scope": ".",
@@ -810,7 +810,7 @@ def build():
     articles.sort(key=lambda a: a["date"], reverse=True)
 
     # Second pass: render + write each article page, now with a "More from
-    # CardPulse" block linking to other articles.
+    # MarketLair" block linking to other articles.
     for a in articles:
         tag_html = (
             f"<span class='tag {game_slug(a['game'])}'>{game_icon(a['game'])} {a['game']}</span> "
@@ -860,11 +860,11 @@ def build():
     (SITE_DIR / "card-index.json").write_text(json.dumps(card_index), encoding="utf-8")
     (SITE_DIR / "snapshot-summary.json").write_text(json.dumps(engagement_summary), encoding="utf-8")
     index_html = template.render(
-        title="CardPulse -- Trading Card Market Data & Analysis",
+        title="MarketLair -- Trading Card Market Data & Analysis",
         description="Plain-English trading card market breakdowns, backed by real price data.",
         content=(
             "<div class='hero'>"
-            "<h1>\U0001F525 CardPulse</h1>"
+            "<h1>\U0001F525 MarketLair</h1>"
             "<p>Real trading-card market data, tracked regularly, explained simply -- "
             "no fluff, just what's moving and why it matters.</p>"
             f"<div class='game-strip'>{game_pills}</div>"
@@ -885,17 +885,17 @@ def build():
     # about / disclosure page
     about_html = template.render(
         title="About & Affiliate Disclosure",
-        description="About CardPulse and how it makes money.",
+        description="About MarketLair and how it makes money.",
         content=(
-            "<h1>About CardPulse</h1>"
-            "<p>CardPulse tracks real trading-card market prices and publishes plain-English "
+            "<h1>About MarketLair</h1>"
+            "<p>MarketLair tracks real trading-card market prices and publishes plain-English "
             "breakdowns of what's moving and why. Data comes from public marketplace APIs.</p>"
             "<h2>Affiliate Disclosure</h2>"
             "<p>Some links on this site are affiliate links (TCGplayer, eBay Partner Network). "
             "If you click through and make a purchase, this site may earn a small commission "
             "at no extra cost to you. We only link to products we'd genuinely point you to.</p>"
             "<h2>Ownership Disclosure</h2>"
-            "<p>CardPulse is run by the same person behind "
+            "<p>MarketLair is run by the same person behind "
             "<a href=\"https://proxylair.com\" target=\"_blank\" rel=\"noopener\">ProxyLair</a>, "
             "a custom TCG proxy card design and production studio. We're upfront about that "
             "connection anywhere the two come up -- if an article mentions ProxyLair, treat it "
@@ -924,7 +924,7 @@ def build():
     # actually come from, and what are their limits.
     methodology_html = template.render(
         title="Methodology",
-        description="Where CardPulse's price data comes from, what \"market price\" means, and where the numbers get shaky.",
+        description="Where MarketLair's price data comes from, what \"market price\" means, and where the numbers get shaky.",
         content=(
             "<h1>Methodology</h1>"
             "<p>Once you publish a number like $2,873.33 for a single card, the fair "

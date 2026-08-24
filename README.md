@@ -1,4 +1,4 @@
-# CardPulse
+# MarketLair
 
 A trading-card market data site covering five games -- Magic: The Gathering,
 Pokemon TCG, One Piece Card Game, Disney Lorcana, and Riftbound -- built from
@@ -62,7 +62,7 @@ Open `docs/index.html` in a browser to preview locally before publishing.
 1. Create a new repo, push this whole folder to it (exact commands below).
 2. Repo Settings -> Pages -> Source: "Deploy from a branch" -> Branch:
    `main`, Folder: `/docs`. Save.
-3. You get a free `yourname.github.io/cardpulse` URL within a minute or two.
+3. You get a free `yourname.github.io/marketlair` URL within a minute or two.
    A real domain (~$10-12/year) is optional and can wait until the site has
    traction -- don't spend money on it yet.
 

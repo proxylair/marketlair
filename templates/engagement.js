@@ -9,24 +9,24 @@
  * the rest of the site.
  *
  * Five independent features:
- *   1. "Since Your Last Visit" banner        (every page, via #cp-visit-banner)
+ *   1. "Since Your Last Visit" banner        (every page, via #ml-visit-banner)
  *   2. Watchlist heart buttons                (homepage mover/quick-hit cards)
  *   3. "Cards You're Watching" strip           (homepage only, #watchlist-section)
  *   4. Shareable card images                  (homepage mover/quick-hit/watchlist cards)
  *   5. "Check Your List" paste-in checker      (homepage only, #list-checker-section)
  *
- * Root-relative fetches use window.CARDPULSE_ROOT (set in base.html) --
+ * Root-relative fetches use window.MARKETLAIR_ROOT (set in base.html) --
  * NOT a leading "/" -- because this site is served from a GitHub Pages
- * project subpath (proxylair.github.io/cardpulse/), not the domain root.
+ * project subpath (proxylair.github.io/marketlair/), not the domain root.
  * A hardcoded "/card-index.json" would 404 there. (This exact class of bug
  * bit the push-notification service worker once already -- see subscribe.js.)
  */
 (function () {
   "use strict";
 
-  var ROOT = window.CARDPULSE_ROOT || "";
-  var LAST_VISIT_KEY = "cp_last_visit";
-  var WATCHLIST_KEY = "cp_watchlist";
+  var ROOT = window.MARKETLAIR_ROOT || "";
+  var LAST_VISIT_KEY = "ml_last_visit";
+  var WATCHLIST_KEY = "ml_watchlist";
 
   // ---------- tiny localStorage helpers (all fail silently) ----------
 
@@ -67,7 +67,7 @@
     // (debounced there) -- if push isn't wired up or nobody's listening,
     // this is just an inert DOM event, no error either way.
     try {
-      document.dispatchEvent(new CustomEvent("cardpulse:watchlist-changed", {
+      document.dispatchEvent(new CustomEvent("marketlair:watchlist-changed", {
         detail: { watchlist: list.slice() }
       }));
     } catch (e) {
@@ -92,7 +92,7 @@
   // ---------- 1. Since Your Last Visit ----------
 
   function initVisitBanner() {
-    var container = document.getElementById("cp-visit-banner");
+    var container = document.getElementById("ml-visit-banner");
     if (!container) return;
 
     var lastVisit;
@@ -324,7 +324,7 @@
       if (logo) ctx.drawImage(logo, 60, 56, 64, 64);
       ctx.fillStyle = "#ffffff";
       ctx.font = "700 34px " + SHARE_FONT;
-      ctx.fillText("CardPulse", logo ? 138 : 60, 88);
+      ctx.fillText("MarketLair", logo ? 138 : 60, 88);
 
       // Game tag chip.
       var chipText = data.gameLabel || "";
@@ -383,13 +383,13 @@
         ctx.fillText("$" + data.newPrice.toFixed(2), 60, priceY);
         ctx.font = "600 26px " + SHARE_FONT;
         ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
-        ctx.fillText("On my CardPulse watchlist", 60, priceY + 42);
+        ctx.fillText("On my MarketLair watchlist", 60, priceY + 42);
       }
 
       // Footer.
       ctx.font = "600 24px " + SHARE_FONT;
       ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
-      ctx.fillText("proxylair.github.io/cardpulse", 60, SHARE_HEIGHT - 48);
+      ctx.fillText("proxylair.github.io/marketlair", 60, SHARE_HEIGHT - 48);
 
       return canvas;
     });
@@ -413,9 +413,9 @@
 
   function shareText(data) {
     if (typeof data.pct === "number") {
-      return data.name + " just moved " + (data.pct > 0 ? "+" : "") + data.pct.toFixed(1) + "% on CardPulse.";
+      return data.name + " just moved " + (data.pct > 0 ? "+" : "") + data.pct.toFixed(1) + "% on MarketLair.";
     }
-    return data.name + " -- tracked on CardPulse.";
+    return data.name + " -- tracked on MarketLair.";
   }
 
   function shareCard(data, btn) {
@@ -430,11 +430,11 @@
         }, "image/png");
       });
     }).then(function (blob) {
-      var filename = "cardpulse-" + slugifyForFilename(data.name) + ".png";
+      var filename = "marketlair-" + slugifyForFilename(data.name) + ".png";
       var file = typeof File !== "undefined" ? new File([blob], filename, { type: "image/png" }) : null;
 
       if (navigator.share && navigator.canShare && file && navigator.canShare({ files: [file] })) {
-        return navigator.share({ files: [file], title: "CardPulse: " + data.name, text: shareText(data) })
+        return navigator.share({ files: [file], title: "MarketLair: " + data.name, text: shareText(data) })
           .catch(function (err) {
             // AbortError = the visitor closed the native share sheet -- not a failure.
             if (!err || err.name !== "AbortError") downloadBlob(blob, filename);
@@ -442,7 +442,7 @@
       }
       downloadBlob(blob, filename);
     }).catch(function (err) {
-      console.error("[CardPulse] share image generation failed:", err);
+      console.error("[MarketLair] share image generation failed:", err);
     }).then(function () {
       btn.disabled = false;
       btn.innerHTML = original;

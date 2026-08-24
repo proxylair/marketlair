@@ -1,6 +1,6 @@
 rules_version = '2';
 
-// CardPulse push-notification subscriber storage.
+// MarketLair push-notification subscriber storage.
 //
 // The site is 100% static/anonymous -- there's no login, so "possession
 // of the exact FCM token" (a long, unguessable, high-entropy string only
@@ -15,7 +15,7 @@ rules_version = '2';
 //
 // watchedCards is the client-side "Keep an eye on this" localStorage
 // watchlist, synced in the same delete-then-recreate way whenever it
-// changes (see subscribe.js's cardpulse:watchlist-changed listener) so
+// changes (see subscribe.js's marketlair:watchlist-changed listener) so
 // send_alerts.py can alert on a specific watched card even outside the
 // subscriber's followed games. It's optional -- omitted entirely for a
 // subscriber with an empty watchlist -- and capped well above any

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name='impact-site-verification' value='ed751989-a3a6-40c8-af34-4fbc254daae8'>
-<title>{{ title }} | CardPulse</title>
+<title>{{ title }} | MarketLair</title>
 <meta name="description" content="{{ description }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,29 +23,29 @@
   how to color its status bar while doing so.
 -->
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="CardPulse">
+<meta name="apple-mobile-web-app-title" content="MarketLair">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
 <div class="confetti-bar" aria-hidden="true"></div>
 <header class="site-header">
-  <a href="{{ root }}index.html" class="brand"><img src="{{ root }}icon-64.png" alt="" class="brand-mark" width="28" height="28">CardPulse</a>
+  <a href="{{ root }}index.html" class="brand"><img src="{{ root }}icon-64.png" alt="" class="brand-mark" width="28" height="28">MarketLair</a>
   <nav>
     <a href="{{ root }}index.html">Articles</a>
     <a href="{{ root }}about.html">About</a>
     <a href="{{ root }}methodology.html">Methodology</a>
   </nav>
 </header>
-<div id="cp-follow-bar"></div>
-<div id="cp-notify-bar"></div>
-<div id="cp-visit-banner"></div>
+<div id="ml-follow-bar"></div>
+<div id="ml-notify-bar"></div>
+<div id="ml-visit-banner"></div>
 <main>
 {{ content|safe }}
 </main>
 <footer class="site-footer">
-  <p>CardPulse tracks real, current trading-card market data and publishes plain-English breakdowns. Some links on this site are affiliate links -- see our <a href="{{ root }}about.html">disclosure</a>. Price data via <a href="https://tcgcsv.com" target="_blank" rel="noopener">TCGCSV</a> (a free mirror of TCGplayer's product/price feeds).</p>
+  <p>MarketLair tracks real, current trading-card market data and publishes plain-English breakdowns. Some links on this site are affiliate links -- see our <a href="{{ root }}about.html">disclosure</a>. Price data via <a href="https://tcgcsv.com" target="_blank" rel="noopener">TCGCSV</a> (a free mirror of TCGplayer's product/price feeds).</p>
   <p class="footer-crosslink">Also from us: <a href="https://proxylair.com" target="_blank" rel="noopener">ProxyLair</a> -- custom TCG proxy cards for casual play and collecting.</p>
-  <p>&copy; {{ year }} CardPulse. Not affiliated with Wizards of the Coast, TCGplayer, or eBay.</p>
+  <p>&copy; {{ year }} MarketLair. Not affiliated with Wizards of the Coast, TCGplayer, or eBay.</p>
 </footer>
 <script src="{{ root }}personalize.js" defer></script>
 <script src="{{ root }}engagement.js" defer></script>
@@ -84,9 +84,9 @@
   // every other {{ root }}-relative link on this page -- subscribe.js
   // needs it too, to register firebase-messaging-sw.js at the actual site
   // root rather than the domain root (this site is served from a GitHub
-  // Pages project subpath, e.g. proxylair.github.io/cardpulse/, not from
+  // Pages project subpath, e.g. proxylair.github.io/marketlair/, not from
   // the domain root).
-  window.CARDPULSE_ROOT = "{{ root }}";
+  window.MARKETLAIR_ROOT = "{{ root }}";
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js" defer></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js" defer></script>

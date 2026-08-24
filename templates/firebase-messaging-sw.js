@@ -29,18 +29,18 @@ if (configParam) {
 
   var messaging = firebase.messaging();
 
-  // Background handler -- fires when a push arrives while no CardPulse tab
+  // Background handler -- fires when a push arrives while no MarketLair tab
   // is focused. Foreground pushes (tab open) are handled in subscribe.js
   // instead, since this handler never fires for those.
   messaging.onBackgroundMessage(function (payload) {
-    var title = (payload.notification && payload.notification.title) || "CardPulse";
+    var title = (payload.notification && payload.notification.title) || "MarketLair";
     var body = (payload.notification && payload.notification.body) || "A card you follow just moved.";
     var options = {
       body: body,
       // Relative (no leading slash) so it resolves against this service
       // worker's own URL -- which, now that it's registered at the site's
       // actual root (see subscribe.js), correctly means
-      // .../cardpulse/icon-192.png rather than the domain root.
+      // .../marketlair/icon-192.png rather than the domain root.
       icon: (payload.notification && payload.notification.icon) || "icon-192.png",
       badge: "icon-192.png",
       // send_alerts.py always sets payload.data.url to the site's real
@@ -54,7 +54,7 @@ if (configParam) {
   });
 }
 
-// Clicking a notification focuses an existing CardPulse tab if one is
+// Clicking a notification focuses an existing MarketLair tab if one is
 // open, otherwise opens the target URL in a new one.
 self.addEventListener("notificationclick", function (event) {
   event.notification.close();
@@ -91,11 +91,11 @@ self.addEventListener("notificationclick", function (event) {
  * uncaught rejection, since an uncaught fetch-handler failure surfaces to
  * the visitor as a broken page load instead of a console warning.
  */
-var CACHE_VERSION = "cardpulse-v1";
+var CACHE_VERSION = "marketlair-v1";
 var OFFLINE_URL = "offline.html";
 // Resolved relative to this file's own URL (self.location), which is
 // already correct on a GitHub Pages project subpath -- same reasoning as
-// subscribe.js using window.CARDPULSE_ROOT instead of a leading "/".
+// subscribe.js using window.MARKETLAIR_ROOT instead of a leading "/".
 var PRECACHE_URLS = [
   "./",
   "index.html",
@@ -119,7 +119,7 @@ self.addEventListener("install", function (event) {
       return Promise.all(
         PRECACHE_URLS.map(function (url) {
           return cache.add(url).catch(function (err) {
-            console.warn("[CardPulse SW] precache failed for", url, err);
+            console.warn("[MarketLair SW] precache failed for", url, err);
           });
         })
       );

@@ -1,7 +1,7 @@
 /*
  * personalize.js
  * ---------------
- * Client-side only "follow a game" personalization for CardPulse -- no
+ * Client-side only "follow a game" personalization for MarketLair -- no
  * backend, no account, just localStorage. Reorders the movers/quick-hits/
  * article grids so a visitor's followed games surface first, and renders a
  * small persistent bar + a one-time picker prompt.
@@ -12,7 +12,7 @@
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "cardpulse_followed_games";
+  var STORAGE_KEY = "ml_followed_games";
 
   var GAMES = [
     { slug: "game-mtg", icon: "🔮", name: "Magic: The Gathering" },
@@ -73,7 +73,7 @@
   }
 
   function renderBar(followed) {
-    var mount = document.getElementById("cp-follow-bar");
+    var mount = document.getElementById("ml-follow-bar");
     if (!mount) return;
     mount.innerHTML = "";
 

@@ -153,7 +153,7 @@ nav a:hover::after { width: 100%; }
 
 /* ---------- Follow-a-game bar + picker (client-side personalization) ---------- */
 
-#cp-follow-bar {
+#ml-follow-bar {
   max-width: 800px;
   margin: 0 auto;
   padding: 10px 20px 0;
@@ -266,13 +266,13 @@ nav a:hover::after { width: 100%; }
 
 /* ---------- Push notification opt-in (subscribe.js) ---------- */
 
-#cp-notify-bar {
+#ml-notify-bar {
   max-width: 800px;
   margin: 0 auto;
   padding: 6px 20px 0;
   display: flex;
 }
-#cp-notify-bar:empty { padding: 0; }
+#ml-notify-bar:empty { padding: 0; }
 .notify-btn { margin-left: auto; }
 .notify-status {
   margin-left: auto;
@@ -287,7 +287,7 @@ nav a:hover::after { width: 100%; }
 .notify-manage { font-size: 0.8rem; }
 .picker-danger { color: var(--accent-2); }
 
-.cp-toast {
+.ml-toast {
   position: fixed;
   right: 18px;
   bottom: 18px;
@@ -301,16 +301,16 @@ nav a:hover::after { width: 100%; }
   display: flex;
   flex-direction: column;
   gap: 4px;
-  animation: cp-toast-in 0.25s ease;
+  animation: ml-toast-in 0.25s ease;
 }
-.cp-toast strong { font-family: "Baloo 2", sans-serif; font-size: 0.95rem; }
-.cp-toast span { color: var(--muted); font-size: 0.85rem; }
-.cp-toast-out { animation: cp-toast-out 0.3s ease forwards; }
-@keyframes cp-toast-in {
+.ml-toast strong { font-family: "Baloo 2", sans-serif; font-size: 0.95rem; }
+.ml-toast span { color: var(--muted); font-size: 0.85rem; }
+.ml-toast-out { animation: ml-toast-out 0.3s ease forwards; }
+@keyframes ml-toast-in {
   from { transform: translateY(12px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-@keyframes cp-toast-out {
+@keyframes ml-toast-out {
   to { transform: translateY(12px); opacity: 0; }
 }
 

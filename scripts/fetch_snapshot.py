@@ -26,7 +26,7 @@ from pathlib import Path
 import requests
 
 BASE = "https://tcgcsv.com/tcgplayer"
-HEADERS = {"User-Agent": "CardPulseResearch/1.0 (contact: proxylair@gmail.com)"}
+HEADERS = {"User-Agent": "MarketLairResearch/1.0 (contact: proxylair@gmail.com)"}
 
 # categoryId per game, from https://tcgcsv.com/tcgplayer/categories
 GAMES = {

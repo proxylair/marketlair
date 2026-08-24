@@ -2,7 +2,7 @@
 """
 send_alerts.py
 ----------------
-Sends a push-notification digest to CardPulse's Firebase Cloud Messaging
+Sends a push-notification digest to MarketLair's Firebase Cloud Messaging
 subscribers, using the exact same "biggest movers" data the homepage
 shows (reuses build_site.compute_market_snapshot() so the numbers can
 never drift between what the site displays and what gets pushed).
@@ -18,7 +18,7 @@ Requires:
     "Generate new private key". By default this script looks for it at
     scripts/serviceAccountKey.json (gitignored); point it elsewhere (e.g.
     if you'd rather keep it outside the repo entirely) with:
-        CARDPULSE_SERVICE_ACCOUNT=/path/to/key.json python3 scripts/send_alerts.py ...
+        MARKETLAIR_SERVICE_ACCOUNT=/path/to/key.json python3 scripts/send_alerts.py ...
     NEVER commit this file -- it grants full admin access to the Firebase
     project, including reading every subscriber's data.
 
@@ -40,7 +40,7 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 import build_site  # noqa: E402 -- reuses the exact movers logic the homepage uses
 
 SERVICE_ACCOUNT_PATH = Path(
-    os.environ.get("CARDPULSE_SERVICE_ACCOUNT", str(SCRIPTS_DIR / "serviceAccountKey.json"))
+    os.environ.get("MARKETLAIR_SERVICE_ACCOUNT", str(SCRIPTS_DIR / "serviceAccountKey.json"))
 )
 LAST_ALERT_MARKER = ROOT / "data" / "last_alerted_snapshot.txt"
 SITE_URL = build_site.SITE_URL  # same TODO-a-real-domain placeholder as the rest of the site
@@ -106,7 +106,7 @@ def build_message(movers):
         body = f'{top["name"]} moved {top["pct"]:+.1f}% (${top["old_price"]:.2f} -> ${top["new_price"]:.2f})'
     else:
         body = f'{top["name"]} {top["pct"]:+.1f}% and {len(movers) - 1} more card(s) you follow just moved'
-    title = f"{arrow} CardPulse: weekly price alert"
+    title = f"{arrow} MarketLair: weekly price alert"
     return title, body
 
 
@@ -171,7 +171,7 @@ def main():
             return
         print(f"\nMissing {SERVICE_ACCOUNT_PATH}. Generate a service account key in the Firebase "
               "console (Project settings -> Service accounts -> Generate new private key), save "
-              "it there (or point CARDPULSE_SERVICE_ACCOUNT at it), and re-run.")
+              "it there (or point MARKETLAIR_SERVICE_ACCOUNT at it), and re-run.")
         return
 
     import firebase_admin

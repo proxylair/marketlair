@@ -1,7 +1,7 @@
 /*
  * subscribe.js
  * -------------
- * Push notification opt-in/manage/opt-out for CardPulse -- "get pinged
+ * Push notification opt-in/manage/opt-out for MarketLair -- "get pinged
  * when a card you follow moves." Uses Firebase Cloud Messaging
  * (client-side only, no custom backend) + Firestore to store subscriber
  * tokens. Vanilla JS, no build step, matches personalize.js in spirit.
@@ -24,15 +24,15 @@
 (function () {
   "use strict";
 
-  var TOKEN_KEY = "cardpulse_push_token"; // the active FCM token, or absent if not subscribed
-  var GAMES_KEY = "cardpulse_push_games"; // last-known followedGames written to Firestore (avoids a client read)
+  var TOKEN_KEY = "ml_push_token"; // the active FCM token, or absent if not subscribed
+  var GAMES_KEY = "ml_push_games"; // last-known followedGames written to Firestore (avoids a client read)
   // Must match engagement.js's WATCHLIST_KEY exactly -- that file owns the
   // "Keep an eye on this" watchlist (reads/writes it, dispatches the
-  // cardpulse:watchlist-changed event below), this file only reads it to
+  // marketlair:watchlist-changed event below), this file only reads it to
   // sync into the subscriber's Firestore doc. Not shared via a JS module
   // (no build step, no bundler) -- the constant string IS the interface
   // between the two files, same as every other localStorage key here.
-  var WATCHLIST_KEY = "cp_watchlist";
+  var WATCHLIST_KEY = "ml_watchlist";
   var WATCHLIST_SYNC_DEBOUNCE_MS = 1500;
   var watchlistSyncTimer = null;
 
@@ -74,7 +74,7 @@
     try {
       firebase.appCheck(app).activate(window.APPCHECK_SITE_KEY, true);
     } catch (e) {
-      console.warn("[CardPulse] App Check activation failed -- continuing without it", e);
+      console.warn("[MarketLair] App Check activation failed -- continuing without it", e);
     }
   }
 
@@ -123,7 +123,7 @@
     // (personalize.js) the first time someone subscribes -- reasonable
     // default, edited independently afterward via Manage.
     try {
-      var raw = localStorage.getItem("cardpulse_followed_games");
+      var raw = localStorage.getItem("ml_followed_games");
       return raw ? JSON.parse(raw) : [];
     } catch (e) {
       return [];
@@ -142,11 +142,11 @@
 
   function showToast(title, body) {
     var toast = document.createElement("div");
-    toast.className = "cp-toast";
+    toast.className = "ml-toast";
     toast.innerHTML = "<strong>" + title + "</strong><span>" + body + "</span>";
     document.body.appendChild(toast);
     setTimeout(function () {
-      toast.classList.add("cp-toast-out");
+      toast.classList.add("ml-toast-out");
       setTimeout(function () {
         if (toast.parentNode) toast.parentNode.removeChild(toast);
       }, 300);
@@ -156,13 +156,13 @@
   function registerServiceWorkerWithConfig() {
     var configParam = encodeURIComponent(JSON.stringify(window.firebaseConfig));
     // Must resolve to the site's actual root (e.g.
-    // proxylair.github.io/cardpulse/firebase-messaging-sw.js), not the
+    // proxylair.github.io/marketlair/firebase-messaging-sw.js), not the
     // domain root -- a leading "/" would 404 on a GitHub Pages project
-    // subpath. window.CARDPULSE_ROOT is the same "" / "../" prefix base.html
+    // subpath. window.MARKETLAIR_ROOT is the same "" / "../" prefix base.html
     // already uses for every other on-page link, so this resolves
     // correctly relative to whichever page (index vs. an article) the
     // visitor subscribed from.
-    var root = window.CARDPULSE_ROOT || "";
+    var root = window.MARKETLAIR_ROOT || "";
     return navigator.serviceWorker.register(root + "firebase-messaging-sw.js?firebaseConfig=" + configParam);
   }
 
@@ -187,18 +187,18 @@
       return;
     }
     registerServiceWorkerWithConfig().catch(function (err) {
-      console.error("[CardPulse] service worker registration failed:", err);
+      console.error("[MarketLair] service worker registration failed:", err);
     });
   }
 
   function attachForegroundListener(app) {
     // Foreground messages -- the service worker's background handler only
-    // fires when no CardPulse tab has focus. Re-attached on every page
+    // fires when no MarketLair tab has focus. Re-attached on every page
     // load for an already-subscribed visitor, not just right after a
     // fresh subscribe, so returning visitors still get in-tab toasts.
     var messaging = firebase.messaging(app);
     messaging.onMessage(function (payload) {
-      var title = (payload.notification && payload.notification.title) || "CardPulse";
+      var title = (payload.notification && payload.notification.title) || "MarketLair";
       var body = (payload.notification && payload.notification.body) || "A card you follow just moved.";
       showToast(title, body);
     });
@@ -258,7 +258,7 @@
         });
       })
       .catch(function (err) {
-        console.error("[CardPulse] push subscribe failed:", err);
+        console.error("[MarketLair] push subscribe failed:", err);
         button.disabled = false;
         button.textContent = "🔔 Get price alerts";
       });
@@ -281,7 +281,7 @@
         }
       })
       .catch(function (e) {
-        console.error("[CardPulse] unsubscribe cleanup failed:", e);
+        console.error("[MarketLair] unsubscribe cleanup failed:", e);
       })
       .then(function () {
         lsRemove(TOKEN_KEY);
@@ -306,7 +306,7 @@
         render();
       })
       .catch(function (e) {
-        console.error("[CardPulse] saving alert preferences failed:", e);
+        console.error("[MarketLair] saving alert preferences failed:", e);
       });
   }
 
@@ -323,11 +323,11 @@
     db.collection("push_subscribers").doc(token).delete()
       .then(function () { return writeSubscriberDoc(db, token, getGamesList(), watchlist); })
       .catch(function (e) {
-        console.error("[CardPulse] syncing watchlist to alerts failed:", e);
+        console.error("[MarketLair] syncing watchlist to alerts failed:", e);
       });
   }
 
-  document.addEventListener("cardpulse:watchlist-changed", function (evt) {
+  document.addEventListener("marketlair:watchlist-changed", function (evt) {
     var watchlist = (evt.detail && evt.detail.watchlist) || getWatchlist();
     if (watchlistSyncTimer) clearTimeout(watchlistSyncTimer);
     // Debounced so a quick burst of heart-clicks becomes one Firestore
@@ -415,7 +415,7 @@
   }
 
   function render() {
-    var mount = document.getElementById("cp-notify-bar");
+    var mount = document.getElementById("ml-notify-bar");
     if (!mount) return;
     mount.innerHTML = "";
 

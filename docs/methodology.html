@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name='impact-site-verification' value='ed751989-a3a6-40c8-af34-4fbc254daae8'>
-<title>Methodology | CardPulse</title>
-<meta name="description" content="Where CardPulse's price data comes from, what "market price" means, and where the numbers get shaky.">
+<title>Methodology | MarketLair</title>
+<meta name="description" content="Where MarketLair's price data comes from, what "market price" means, and where the numbers get shaky.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
@@ -23,29 +23,29 @@
   how to color its status bar while doing so.
 -->
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="CardPulse">
+<meta name="apple-mobile-web-app-title" content="MarketLair">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
 <div class="confetti-bar" aria-hidden="true"></div>
 <header class="site-header">
-  <a href="index.html" class="brand"><img src="icon-64.png" alt="" class="brand-mark" width="28" height="28">CardPulse</a>
+  <a href="index.html" class="brand"><img src="icon-64.png" alt="" class="brand-mark" width="28" height="28">MarketLair</a>
   <nav>
     <a href="index.html">Articles</a>
     <a href="about.html">About</a>
     <a href="methodology.html">Methodology</a>
   </nav>
 </header>
-<div id="cp-follow-bar"></div>
-<div id="cp-notify-bar"></div>
-<div id="cp-visit-banner"></div>
+<div id="ml-follow-bar"></div>
+<div id="ml-notify-bar"></div>
+<div id="ml-visit-banner"></div>
 <main>
 <h1>Methodology</h1><p>Once you publish a number like $2,873.33 for a single card, the fair next question is: where exactly did that come from? Here's the honest answer.</p><h2>Where the data comes from</h2><p>Prices come from <a href="https://tcgcsv.com" target="_blank" rel="noopener">TCGCSV</a>, a free, no-API-key mirror of TCGplayer's own product and pricing feeds. We don't run our own marketplace or set any prices ourselves -- we're reading the same catalog TCGplayer exposes and explaining what changed.</p><h2>What "market price" means</h2><p>The price shown in articles is TCGplayer's <strong>market price</strong> for that product: a rolling estimate based on recent sales activity, not a single listing and not a guaranteed sale price. We also pull low and high prices where relevant, which reflect the current range of active listings.</p><h2>How "movers" are calculated</h2><p>We keep a dated snapshot of the full catalog each time we pull data, and compare the two most recent snapshots to find the biggest gainers and losers. To keep that list honest, we filter out anything under $1.00 (a card going from $0.04 to $0.08 is technically "+100%" and means nothing) and anything moving less than 8% -- normal day-to-day noise, not a real move.</p><h2>Low-volume and thin-market cards</h2><p>Rare, newly-released, or low-print cards can have a "market price" set by only a handful of actual sales -- sometimes even by active listings rather than completed ones. We call this out directly in articles that cover chase-tier cards, because a price built on 2-3 sales can move 20-30% on a single new listing. Treat those numbers as the current pecking order, not a guaranteed valuation.</p><h2>Sealed product vs. singles</h2><p>When an article covers sealed product (starter decks, booster boxes), that price is for the sealed unit itself, not the sum of the cards inside it -- we call out the difference explicitly when it's relevant to the takeaway.</p><h2>What's not included</h2><p>Prices shown do not include shipping, marketplace fees, or sales tax. They're a snapshot as of the article's date and will drift -- always check current listings before buying or selling based on a number you read here.</p><h2>Analysis vs. fact</h2><p>When an article suggests <em>why</em> a price might be moving -- competitive play, collector demand, print scarcity -- that's our read of the data, not a confirmed fact. We try to flag that distinction with language like "may indicate" or "the data suggests" rather than stating a cause as settled.</p>
 </main>
 <footer class="site-footer">
-  <p>CardPulse tracks real, current trading-card market data and publishes plain-English breakdowns. Some links on this site are affiliate links -- see our <a href="about.html">disclosure</a>. Price data via <a href="https://tcgcsv.com" target="_blank" rel="noopener">TCGCSV</a> (a free mirror of TCGplayer's product/price feeds).</p>
+  <p>MarketLair tracks real, current trading-card market data and publishes plain-English breakdowns. Some links on this site are affiliate links -- see our <a href="about.html">disclosure</a>. Price data via <a href="https://tcgcsv.com" target="_blank" rel="noopener">TCGCSV</a> (a free mirror of TCGplayer's product/price feeds).</p>
   <p class="footer-crosslink">Also from us: <a href="https://proxylair.com" target="_blank" rel="noopener">ProxyLair</a> -- custom TCG proxy cards for casual play and collecting.</p>
-  <p>&copy; 2026 CardPulse. Not affiliated with Wizards of the Coast, TCGplayer, or eBay.</p>
+  <p>&copy; 2026 MarketLair. Not affiliated with Wizards of the Coast, TCGplayer, or eBay.</p>
 </footer>
 <script src="personalize.js" defer></script>
 <script src="engagement.js" defer></script>
@@ -84,9 +84,9 @@
   // every other -relative link on this page -- subscribe.js
   // needs it too, to register firebase-messaging-sw.js at the actual site
   // root rather than the domain root (this site is served from a GitHub
-  // Pages project subpath, e.g. proxylair.github.io/cardpulse/, not from
+  // Pages project subpath, e.g. proxylair.github.io/marketlair/, not from
   // the domain root).
-  window.CARDPULSE_ROOT = "";
+  window.MARKETLAIR_ROOT = "";
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js" defer></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js" defer></script>

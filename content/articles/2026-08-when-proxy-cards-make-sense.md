@@ -1,6 +1,6 @@
 ---
 title: When Proxy Cards Actually Make Sense (And When They Don't)
-description: A plain look at why players use custom proxy cards, where they actually make sense, and where CardPulse's own price data explains the appeal.
+description: A plain look at why players use custom proxy cards, where they actually make sense, and where MarketLair's own price data explains the appeal.
 date: 2026-08-19
 game: Collecting & Community
 ---
@@ -43,7 +43,7 @@ conversation before the game starts.
 **Where proxies start making a lot of sense.** Price is the obvious
 example.
 
-CardPulse's own market data gives us some extreme examples. In our
+MarketLair's own market data gives us some extreme examples. In our
 [Attack of the Vine! chase-card breakdown](2026-08-lorcana-attack-of-the-vine-chase-cards.html),
 Belle & Beast - Certain as the Sun was tracked at $2,188.63, while Lilo &
 Stitch - Fun-Loving Friends was at $1,681.59. Our
@@ -103,7 +103,7 @@ custom proxy -- not passed off or sold as an authentic card.
 **Who we'd point you to.** If you've decided a custom proxy makes sense
 for how you play, we'd point you toward [ProxyLair](https://proxylair.com/).
 
-There is an important disclosure here: ProxyLair and CardPulse are run by
+There is an important disclosure here: ProxyLair and MarketLair are run by
 the same person.
 
 ProxyLair focuses on individually produced custom cards rather than a
@@ -119,7 +119,7 @@ make perfect sense.
 And if you're staring at a $40 card wondering whether it's even good in
 your deck, it might make just as much sense there too.
 
-**Disclosure.** CardPulse and ProxyLair are operated by the same owner.
+**Disclosure.** MarketLair and ProxyLair are operated by the same owner.
 ProxyLair is a custom TCG proxy card design and production studio.
-Articles published by CardPulse are drafted using current market data and
+Articles published by MarketLair are drafted using current market data and
 reviewed and approved by the owner before publication.
